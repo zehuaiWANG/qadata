@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qadata.dao.ReportProductInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.qadata.pojo.ReportProductInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="test_report_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="end_customer_brand" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="client_purchase_order_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="style" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, test_report_id, end_customer_brand, client_purchase_order_no, style
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from report_product_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from report_product_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qadata.pojo.ReportProductInfo" >
+    insert into report_product_info (id, test_report_id, end_customer_brand, 
+      client_purchase_order_no, style)
+    values (#{id,jdbcType=INTEGER}, #{testReportId,jdbcType=INTEGER}, #{endCustomerBrand,jdbcType=VARCHAR}, 
+      #{clientPurchaseOrderNo,jdbcType=VARCHAR}, #{style,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qadata.pojo.ReportProductInfo" >
+    insert into report_product_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="testReportId != null" >
+        test_report_id,
+      </if>
+      <if test="endCustomerBrand != null" >
+        end_customer_brand,
+      </if>
+      <if test="clientPurchaseOrderNo != null" >
+        client_purchase_order_no,
+      </if>
+      <if test="style != null" >
+        style,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="testReportId != null" >
+        #{testReportId,jdbcType=INTEGER},
+      </if>
+      <if test="endCustomerBrand != null" >
+        #{endCustomerBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="clientPurchaseOrderNo != null" >
+        #{clientPurchaseOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null" >
+        #{style,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qadata.pojo.ReportProductInfo" >
+    update report_product_info
+    <set >
+      <if test="testReportId != null" >
+        test_report_id = #{testReportId,jdbcType=INTEGER},
+      </if>
+      <if test="endCustomerBrand != null" >
+        end_customer_brand = #{endCustomerBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="clientPurchaseOrderNo != null" >
+        client_purchase_order_no = #{clientPurchaseOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null" >
+        style = #{style,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qadata.pojo.ReportProductInfo" >
+    update report_product_info
+    set test_report_id = #{testReportId,jdbcType=INTEGER},
+      end_customer_brand = #{endCustomerBrand,jdbcType=VARCHAR},
+      client_purchase_order_no = #{clientPurchaseOrderNo,jdbcType=VARCHAR},
+      style = #{style,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--新增-->
+  <select id="selectByReportId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from report_product_info
+    where test_report_id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

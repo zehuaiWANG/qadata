@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qadata.dao.TestOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.qadata.pojo.TestOrder" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="service_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="products_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="export_market" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="buyer" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="test_standard" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="other_info" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="file_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, service_type, products_type, export_market, buyer, test_standard, other_info, 
+    file_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from test_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from test_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qadata.pojo.TestOrder" >
+    insert into test_order (id, user_id, service_type, 
+      products_type, export_market, buyer, 
+      test_standard, other_info, file_url
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{serviceType,jdbcType=VARCHAR}, 
+      #{productsType,jdbcType=VARCHAR}, #{exportMarket,jdbcType=VARCHAR}, #{buyer,jdbcType=VARCHAR}, 
+      #{testStandard,jdbcType=VARCHAR}, #{otherInfo,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qadata.pojo.TestOrder" >
+    insert into test_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="serviceType != null" >
+        service_type,
+      </if>
+      <if test="productsType != null" >
+        products_type,
+      </if>
+      <if test="exportMarket != null" >
+        export_market,
+      </if>
+      <if test="buyer != null" >
+        buyer,
+      </if>
+      <if test="testStandard != null" >
+        test_standard,
+      </if>
+      <if test="otherInfo != null" >
+        other_info,
+      </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceType != null" >
+        #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="productsType != null" >
+        #{productsType,jdbcType=VARCHAR},
+      </if>
+      <if test="exportMarket != null" >
+        #{exportMarket,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer != null" >
+        #{buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="testStandard != null" >
+        #{testStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="otherInfo != null" >
+        #{otherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qadata.pojo.TestOrder" >
+    update test_order
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceType != null" >
+        service_type = #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="productsType != null" >
+        products_type = #{productsType,jdbcType=VARCHAR},
+      </if>
+      <if test="exportMarket != null" >
+        export_market = #{exportMarket,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer != null" >
+        buyer = #{buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="testStandard != null" >
+        test_standard = #{testStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="otherInfo != null" >
+        other_info = #{otherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qadata.pojo.TestOrder" >
+    update test_order
+    set user_id = #{userId,jdbcType=INTEGER},
+      service_type = #{serviceType,jdbcType=VARCHAR},
+      products_type = #{productsType,jdbcType=VARCHAR},
+      export_market = #{exportMarket,jdbcType=VARCHAR},
+      buyer = #{buyer,jdbcType=VARCHAR},
+      test_standard = #{testStandard,jdbcType=VARCHAR},
+      other_info = #{otherInfo,jdbcType=VARCHAR},
+      file_url = #{fileUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--新增-->
+  <select id="selectTestOrderInRange" parameterType="com.qadata.vo.Range2" resultMap="BaseResultMap">
+    SELECT * FROM
+    (SELECT ROW_NUMBER() OVER(ORDER BY id DESC) as rowIndex,* FROM test_order)as b where <![CDATA[(b.rowindex>=#{start}) and (b.rowindex <= #{last}) and(b.user_id=${userId}) order by b.rowindex]]>
+  </select>
+
+  <select id="selectAllTestOrderInRange" parameterType="com.qadata.vo.Range" resultMap="BaseResultMap">
+    SELECT * FROM
+    (SELECT ROW_NUMBER() OVER(ORDER BY id DESC) as rowIndex,* FROM test_order)as b where <![CDATA[(b.rowindex>=#{start}) and (b.rowindex <= #{last}) order by b.rowindex]]>
+  </select>
+
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from test_order
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <select id="getTotalNumberByAdmin" resultType="int">
+    select count(*) from test_order;
+  </select>
+
+  <select id="getTotalNumber" resultType="int" parameterType="java.lang.Integer">
+    select count(*) from test_order where user_id=#{userId};
+  </select>
+
+  <select id="getFuzzySearchTotalNumber" resultType="int" parameterType="com.qadata.vo.Range3">
+    select count(*) from
+    test_order where
+    user_id=#{userId}
+    and (service_type + products_type + export_market + buyer like '%${content}%')
+  </select>
+
+  <select id="fuzzySearch" parameterType="com.qadata.vo.Range3" resultMap="BaseResultMap">
+    SELECT * FROM
+    (SELECT ROW_NUMBER() OVER(ORDER BY id DESC) as rowIndex,* FROM test_order)as b where
+    <![CDATA[(b.rowindex>=#{start})
+      and (b.rowindex <= #{last})
+      and (b.user_id=${userId})
+      and (b.service_type + b.products_type + b.export_market + b.buyer like '%${content}%')
+      order by b.rowindex
+        ]]>
+  </select>
+</mapper>
+

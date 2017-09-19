@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qadata.dao.InspectionReportMapper" >
+  <resultMap id="BaseResultMap" type="com.qadata.pojo.InspectionReport" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="report_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="service_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="inspection_standard" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="inspection_lab" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="inspection_date" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="factory_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="factory_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="report_result" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="buyer" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="production_info_on_po" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="product_specifications" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="submitted_samples" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="barcode_verification" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="labeling" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="packing" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="assortment" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="export_carton_packing" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="inner_carton_packing" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="product_packing" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="condition_of_containers" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="condition_of_export_cartons" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="quantity_and_assortment" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="weight_result" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="measurement_result" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="workmanship_details" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="file_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, report_number, service_type, inspection_standard, inspection_lab, inspection_date, 
+    factory_number, factory_name, report_result, buyer, production_info_on_po, product_specifications, 
+    submitted_samples, barcode_verification, labeling, packing, assortment, export_carton_packing, 
+    inner_carton_packing, product_packing, condition_of_containers, condition_of_export_cartons, 
+    quantity_and_assortment, weight_result, measurement_result, workmanship_details, 
+    file_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from inspection_report
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from inspection_report
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qadata.pojo.InspectionReport" >
+    insert into inspection_report (id, user_id, report_number, 
+      service_type, inspection_standard, inspection_lab, 
+      inspection_date, factory_number, factory_name, 
+      report_result, buyer, production_info_on_po, 
+      product_specifications, submitted_samples, 
+      barcode_verification, labeling, packing, 
+      assortment, export_carton_packing, inner_carton_packing, 
+      product_packing, condition_of_containers, 
+      condition_of_export_cartons, quantity_and_assortment, 
+      weight_result, measurement_result, workmanship_details, 
+      file_url)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{reportNumber,jdbcType=VARCHAR}, 
+      #{serviceType,jdbcType=VARCHAR}, #{inspectionStandard,jdbcType=VARCHAR}, #{inspectionLab,jdbcType=VARCHAR}, 
+      #{inspectionDate,jdbcType=DATE}, #{factoryNumber,jdbcType=VARCHAR}, #{factoryName,jdbcType=VARCHAR}, 
+      #{reportResult,jdbcType=VARCHAR}, #{buyer,jdbcType=VARCHAR}, #{productionInfoOnPo,jdbcType=VARCHAR}, 
+      #{productSpecifications,jdbcType=VARCHAR}, #{submittedSamples,jdbcType=VARCHAR}, 
+      #{barcodeVerification,jdbcType=VARCHAR}, #{labeling,jdbcType=VARCHAR}, #{packing,jdbcType=VARCHAR}, 
+      #{assortment,jdbcType=VARCHAR}, #{exportCartonPacking,jdbcType=VARCHAR}, #{innerCartonPacking,jdbcType=VARCHAR}, 
+      #{productPacking,jdbcType=VARCHAR}, #{conditionOfContainers,jdbcType=VARCHAR}, 
+      #{conditionOfExportCartons,jdbcType=VARCHAR}, #{quantityAndAssortment,jdbcType=VARCHAR}, 
+      #{weightResult,jdbcType=VARCHAR}, #{measurementResult,jdbcType=VARCHAR}, #{workmanshipDetails,jdbcType=VARCHAR}, 
+      #{fileUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qadata.pojo.InspectionReport" >
+    insert into inspection_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="reportNumber != null" >
+        report_number,
+      </if>
+      <if test="serviceType != null" >
+        service_type,
+      </if>
+      <if test="inspectionStandard != null" >
+        inspection_standard,
+      </if>
+      <if test="inspectionLab != null" >
+        inspection_lab,
+      </if>
+      <if test="inspectionDate != null" >
+        inspection_date,
+      </if>
+      <if test="factoryNumber != null" >
+        factory_number,
+      </if>
+      <if test="factoryName != null" >
+        factory_name,
+      </if>
+      <if test="reportResult != null" >
+        report_result,
+      </if>
+      <if test="buyer != null" >
+        buyer,
+      </if>
+      <if test="productionInfoOnPo != null" >
+        production_info_on_po,
+      </if>
+      <if test="productSpecifications != null" >
+        product_specifications,
+      </if>
+      <if test="submittedSamples != null" >
+        submitted_samples,
+      </if>
+      <if test="barcodeVerification != null" >
+        barcode_verification,
+      </if>
+      <if test="labeling != null" >
+        labeling,
+      </if>
+      <if test="packing != null" >
+        packing,
+      </if>
+      <if test="assortment != null" >
+        assortment,
+      </if>
+      <if test="exportCartonPacking != null" >
+        export_carton_packing,
+      </if>
+      <if test="innerCartonPacking != null" >
+        inner_carton_packing,
+      </if>
+      <if test="productPacking != null" >
+        product_packing,
+      </if>
+      <if test="conditionOfContainers != null" >
+        condition_of_containers,
+      </if>
+      <if test="conditionOfExportCartons != null" >
+        condition_of_export_cartons,
+      </if>
+      <if test="quantityAndAssortment != null" >
+        quantity_and_assortment,
+      </if>
+      <if test="weightResult != null" >
+        weight_result,
+      </if>
+      <if test="measurementResult != null" >
+        measurement_result,
+      </if>
+      <if test="workmanshipDetails != null" >
+        workmanship_details,
+      </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="reportNumber != null" >
+        #{reportNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null" >
+        #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionStandard != null" >
+        #{inspectionStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionLab != null" >
+        #{inspectionLab,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionDate != null" >
+        #{inspectionDate,jdbcType=DATE},
+      </if>
+      <if test="factoryNumber != null" >
+        #{factoryNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null" >
+        #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportResult != null" >
+        #{reportResult,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer != null" >
+        #{buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="productionInfoOnPo != null" >
+        #{productionInfoOnPo,jdbcType=VARCHAR},
+      </if>
+      <if test="productSpecifications != null" >
+        #{productSpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="submittedSamples != null" >
+        #{submittedSamples,jdbcType=VARCHAR},
+      </if>
+      <if test="barcodeVerification != null" >
+        #{barcodeVerification,jdbcType=VARCHAR},
+      </if>
+      <if test="labeling != null" >
+        #{labeling,jdbcType=VARCHAR},
+      </if>
+      <if test="packing != null" >
+        #{packing,jdbcType=VARCHAR},
+      </if>
+      <if test="assortment != null" >
+        #{assortment,jdbcType=VARCHAR},
+      </if>
+      <if test="exportCartonPacking != null" >
+        #{exportCartonPacking,jdbcType=VARCHAR},
+      </if>
+      <if test="innerCartonPacking != null" >
+        #{innerCartonPacking,jdbcType=VARCHAR},
+      </if>
+      <if test="productPacking != null" >
+        #{productPacking,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionOfContainers != null" >
+        #{conditionOfContainers,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionOfExportCartons != null" >
+        #{conditionOfExportCartons,jdbcType=VARCHAR},
+      </if>
+      <if test="quantityAndAssortment != null" >
+        #{quantityAndAssortment,jdbcType=VARCHAR},
+      </if>
+      <if test="weightResult != null" >
+        #{weightResult,jdbcType=VARCHAR},
+      </if>
+      <if test="measurementResult != null" >
+        #{measurementResult,jdbcType=VARCHAR},
+      </if>
+      <if test="workmanshipDetails != null" >
+        #{workmanshipDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qadata.pojo.InspectionReport" >
+    update inspection_report
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="reportNumber != null" >
+        report_number = #{reportNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null" >
+        service_type = #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionStandard != null" >
+        inspection_standard = #{inspectionStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionLab != null" >
+        inspection_lab = #{inspectionLab,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionDate != null" >
+        inspection_date = #{inspectionDate,jdbcType=DATE},
+      </if>
+      <if test="factoryNumber != null" >
+        factory_number = #{factoryNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null" >
+        factory_name = #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportResult != null" >
+        report_result = #{reportResult,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer != null" >
+        buyer = #{buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="productionInfoOnPo != null" >
+        production_info_on_po = #{productionInfoOnPo,jdbcType=VARCHAR},
+      </if>
+      <if test="productSpecifications != null" >
+        product_specifications = #{productSpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="submittedSamples != null" >
+        submitted_samples = #{submittedSamples,jdbcType=VARCHAR},
+      </if>
+      <if test="barcodeVerification != null" >
+        barcode_verification = #{barcodeVerification,jdbcType=VARCHAR},
+      </if>
+      <if test="labeling != null" >
+        labeling = #{labeling,jdbcType=VARCHAR},
+      </if>
+      <if test="packing != null" >
+        packing = #{packing,jdbcType=VARCHAR},
+      </if>
+      <if test="assortment != null" >
+        assortment = #{assortment,jdbcType=VARCHAR},
+      </if>
+      <if test="exportCartonPacking != null" >
+        export_carton_packing = #{exportCartonPacking,jdbcType=VARCHAR},
+      </if>
+      <if test="innerCartonPacking != null" >
+        inner_carton_packing = #{innerCartonPacking,jdbcType=VARCHAR},
+      </if>
+      <if test="productPacking != null" >
+        product_packing = #{productPacking,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionOfContainers != null" >
+        condition_of_containers = #{conditionOfContainers,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionOfExportCartons != null" >
+        condition_of_export_cartons = #{conditionOfExportCartons,jdbcType=VARCHAR},
+      </if>
+      <if test="quantityAndAssortment != null" >
+        quantity_and_assortment = #{quantityAndAssortment,jdbcType=VARCHAR},
+      </if>
+      <if test="weightResult != null" >
+        weight_result = #{weightResult,jdbcType=VARCHAR},
+      </if>
+      <if test="measurementResult != null" >
+        measurement_result = #{measurementResult,jdbcType=VARCHAR},
+      </if>
+      <if test="workmanshipDetails != null" >
+        workmanship_details = #{workmanshipDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qadata.pojo.InspectionReport" >
+    update inspection_report
+    set user_id = #{userId,jdbcType=INTEGER},
+      report_number = #{reportNumber,jdbcType=VARCHAR},
+      service_type = #{serviceType,jdbcType=VARCHAR},
+      inspection_standard = #{inspectionStandard,jdbcType=VARCHAR},
+      inspection_lab = #{inspectionLab,jdbcType=VARCHAR},
+      inspection_date = #{inspectionDate,jdbcType=DATE},
+      factory_number = #{factoryNumber,jdbcType=VARCHAR},
+      factory_name = #{factoryName,jdbcType=VARCHAR},
+      report_result = #{reportResult,jdbcType=VARCHAR},
+      buyer = #{buyer,jdbcType=VARCHAR},
+      production_info_on_po = #{productionInfoOnPo,jdbcType=VARCHAR},
+      product_specifications = #{productSpecifications,jdbcType=VARCHAR},
+      submitted_samples = #{submittedSamples,jdbcType=VARCHAR},
+      barcode_verification = #{barcodeVerification,jdbcType=VARCHAR},
+      labeling = #{labeling,jdbcType=VARCHAR},
+      packing = #{packing,jdbcType=VARCHAR},
+      assortment = #{assortment,jdbcType=VARCHAR},
+      export_carton_packing = #{exportCartonPacking,jdbcType=VARCHAR},
+      inner_carton_packing = #{innerCartonPacking,jdbcType=VARCHAR},
+      product_packing = #{productPacking,jdbcType=VARCHAR},
+      condition_of_containers = #{conditionOfContainers,jdbcType=VARCHAR},
+      condition_of_export_cartons = #{conditionOfExportCartons,jdbcType=VARCHAR},
+      quantity_and_assortment = #{quantityAndAssortment,jdbcType=VARCHAR},
+      weight_result = #{weightResult,jdbcType=VARCHAR},
+      measurement_result = #{measurementResult,jdbcType=VARCHAR},
+      workmanship_details = #{workmanshipDetails,jdbcType=VARCHAR},
+      file_url = #{fileUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--新增-->
+  <select id="selectInspectionReportInRange" parameterType="com.qadata.vo.Range2" resultMap="BaseResultMap">
+    SELECT * FROM
+    (SELECT ROW_NUMBER() OVER(ORDER BY inspection_date DESC ,id DESC ) as rowindex,* FROM inspection_report)as b where <![CDATA[(b.rowindex>=#{start}) and (b.rowindex <= #{last}) and(b.user_id=${userId}) order by b.rowindex]]>
+  </select>
+
+  <select id="selectAllInspectionReportInRange" parameterType="com.qadata.vo.Range" resultMap="BaseResultMap">
+    SELECT * FROM
+    (SELECT ROW_NUMBER() OVER(ORDER BY id DESC ) as rowIndex,* FROM inspection_report)as b where <![CDATA[(b.rowindex>=#{start}) and (b.rowindex <= #{last}) order by b.rowindex ]]>
+  </select>
+
+  <select id="getTotalNumber" resultType="int" parameterType="java.lang.Integer">
+    select count(*) from inspection_report where user_id=#{userId};
+  </select>
+
+  <select id="getTotalNumberByAdmin" resultType="int">
+    select count(*) from inspection_report;
+  </select>
+
+  <select id="getFuzzySearchTotalNumber" resultType="int" parameterType="com.qadata.vo.Range3">
+    select count(*) from
+    inspection_report where
+    user_id=#{userId}
+    and (report_number + service_type + inspection_standard + inspection_lab + factory_number + report_result + buyer like '%${content}%'  or inspection_date like '%${content}%')
+  </select>
+
+  <select id="fuzzySearch" parameterType="com.qadata.vo.Range3" resultMap="BaseResultMap">
+    SELECT * FROM
+    (SELECT ROW_NUMBER() OVER(ORDER BY id DESC) as rowIndex,* FROM inspection_report)as b where
+    <![CDATA[(b.rowindex>=#{start})
+      and (b.rowindex <= #{last})
+      and (b.user_id=${userId})
+      and (b.report_number + b.service_type + b.inspection_standard + b.inspection_lab + b.factory_number + b.report_result + b.buyer like '%${content}%'  or b.inspection_date like '%${content}%')
+      order by b.rowindex
+        ]]>
+  </select>
+</mapper>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qadata.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.qadata.pojo.User" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="phoneNumber" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receive_mail" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="state" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mail" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, name, password, phoneNumber, receive_mail, state, mail
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qadata.pojo.User" >
+    insert into user (id, type, name, 
+      password, phoneNumber, receive_mail, 
+      state, mail)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}, #{receiveMail,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qadata.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="phonenumber != null" >
+        phoneNumber,
+      </if>
+      <if test="receiveMail != null" >
+        receive_mail,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="mail != null" >
+        mail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null" >
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMail != null" >
+        #{receiveMail,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectByMail"  resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+     FROM user
+    WHERE
+    mail = #{mail,jdbcType=VARCHAR}
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qadata.pojo.User" >
+    update user
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null" >
+        phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMail != null" >
+        receive_mail = #{receiveMail,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qadata.pojo.User" >
+    update user
+    set type = #{type,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      receive_mail = #{receiveMail,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getTotalNumber" resultType="int">
+    select count(1) from user
+  </select>
+
+  <select id="selectUserInRange" resultMap="BaseResultMap" parameterType="com.qadata.vo.Range">
+        SELECT * FROM
+    (SELECT ROW_NUMBER() OVER(ORDER BY id DESC) as rowIndex,* FROM [user])as b where <![CDATA[(b.rowindex>=#{start}) and (b.rowindex <= #{last}) and b.type!='admin']]>
+
+  </select>
+</mapper>

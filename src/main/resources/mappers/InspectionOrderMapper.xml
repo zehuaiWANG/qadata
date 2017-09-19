@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qadata.dao.InspectionOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.qadata.pojo.InspectionOrder" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="service_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="inspection_standard" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="inspection_lab" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="inspection_date" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="estimated_loading_date" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="buyer" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="contacts" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="buyer_email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="buyer_tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="inspection_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="factory_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="factory_contacts" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="factory_email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="factory_tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="other_info" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="file_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, service_type, inspection_standard, inspection_lab, inspection_date, 
+    estimated_loading_date, buyer, contacts, buyer_email, buyer_tel, inspection_address, 
+    factory_name, factory_contacts, factory_email, factory_tel, other_info, file_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from inspection_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from inspection_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qadata.pojo.InspectionOrder" >
+    insert into inspection_order (id, user_id, service_type, 
+      inspection_standard, inspection_lab, inspection_date, 
+      estimated_loading_date, buyer, contacts, 
+      buyer_email, buyer_tel, inspection_address, 
+      factory_name, factory_contacts, factory_email, 
+      factory_tel, other_info, file_url
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{serviceType,jdbcType=VARCHAR}, 
+      #{inspectionStandard,jdbcType=VARCHAR}, #{inspectionLab,jdbcType=VARCHAR}, #{inspectionDate,jdbcType=DATE}, 
+      #{estimatedLoadingDate,jdbcType=DATE}, #{buyer,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, 
+      #{buyerEmail,jdbcType=VARCHAR}, #{buyerTel,jdbcType=VARCHAR}, #{inspectionAddress,jdbcType=VARCHAR}, 
+      #{factoryName,jdbcType=VARCHAR}, #{factoryContacts,jdbcType=VARCHAR}, #{factoryEmail,jdbcType=VARCHAR}, 
+      #{factoryTel,jdbcType=VARCHAR}, #{otherInfo,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qadata.pojo.InspectionOrder" >
+    insert into inspection_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="serviceType != null" >
+        service_type,
+      </if>
+      <if test="inspectionStandard != null" >
+        inspection_standard,
+      </if>
+      <if test="inspectionLab != null" >
+        inspection_lab,
+      </if>
+      <if test="inspectionDate != null" >
+        inspection_date,
+      </if>
+      <if test="estimatedLoadingDate != null" >
+        estimated_loading_date,
+      </if>
+      <if test="buyer != null" >
+        buyer,
+      </if>
+      <if test="contacts != null" >
+        contacts,
+      </if>
+      <if test="buyerEmail != null" >
+        buyer_email,
+      </if>
+      <if test="buyerTel != null" >
+        buyer_tel,
+      </if>
+      <if test="inspectionAddress != null" >
+        inspection_address,
+      </if>
+      <if test="factoryName != null" >
+        factory_name,
+      </if>
+      <if test="factoryContacts != null" >
+        factory_contacts,
+      </if>
+      <if test="factoryEmail != null" >
+        factory_email,
+      </if>
+      <if test="factoryTel != null" >
+        factory_tel,
+      </if>
+      <if test="otherInfo != null" >
+        other_info,
+      </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceType != null" >
+        #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionStandard != null" >
+        #{inspectionStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionLab != null" >
+        #{inspectionLab,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionDate != null" >
+        #{inspectionDate,jdbcType=DATE},
+      </if>
+      <if test="estimatedLoadingDate != null" >
+        #{estimatedLoadingDate,jdbcType=DATE},
+      </if>
+      <if test="buyer != null" >
+        #{buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerEmail != null" >
+        #{buyerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerTel != null" >
+        #{buyerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionAddress != null" >
+        #{inspectionAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null" >
+        #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryContacts != null" >
+        #{factoryContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryEmail != null" >
+        #{factoryEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryTel != null" >
+        #{factoryTel,jdbcType=VARCHAR},
+      </if>
+      <if test="otherInfo != null" >
+        #{otherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qadata.pojo.InspectionOrder" >
+    update inspection_order
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceType != null" >
+        service_type = #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionStandard != null" >
+        inspection_standard = #{inspectionStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionLab != null" >
+        inspection_lab = #{inspectionLab,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionDate != null" >
+        inspection_date = #{inspectionDate,jdbcType=DATE},
+      </if>
+      <if test="estimatedLoadingDate != null" >
+        estimated_loading_date = #{estimatedLoadingDate,jdbcType=DATE},
+      </if>
+      <if test="buyer != null" >
+        buyer = #{buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerEmail != null" >
+        buyer_email = #{buyerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerTel != null" >
+        buyer_tel = #{buyerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionAddress != null" >
+        inspection_address = #{inspectionAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null" >
+        factory_name = #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryContacts != null" >
+        factory_contacts = #{factoryContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryEmail != null" >
+        factory_email = #{factoryEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryTel != null" >
+        factory_tel = #{factoryTel,jdbcType=VARCHAR},
+      </if>
+      <if test="otherInfo != null" >
+        other_info = #{otherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qadata.pojo.InspectionOrder" >
+    update inspection_order
+    set user_id = #{userId,jdbcType=INTEGER},
+      service_type = #{serviceType,jdbcType=VARCHAR},
+      inspection_standard = #{inspectionStandard,jdbcType=VARCHAR},
+      inspection_lab = #{inspectionLab,jdbcType=VARCHAR},
+      inspection_date = #{inspectionDate,jdbcType=DATE},
+      estimated_loading_date = #{estimatedLoadingDate,jdbcType=DATE},
+      buyer = #{buyer,jdbcType=VARCHAR},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      buyer_email = #{buyerEmail,jdbcType=VARCHAR},
+      buyer_tel = #{buyerTel,jdbcType=VARCHAR},
+      inspection_address = #{inspectionAddress,jdbcType=VARCHAR},
+      factory_name = #{factoryName,jdbcType=VARCHAR},
+      factory_contacts = #{factoryContacts,jdbcType=VARCHAR},
+      factory_email = #{factoryEmail,jdbcType=VARCHAR},
+      factory_tel = #{factoryTel,jdbcType=VARCHAR},
+      other_info = #{otherInfo,jdbcType=VARCHAR},
+      file_url = #{fileUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectInspectionOrderInRange" parameterType="com.qadata.vo.Range2" resultMap="BaseResultMap">
+    SELECT * FROM
+    (SELECT ROW_NUMBER() OVER(ORDER BY inspection_date DESC,id DESC) as rowIndex,* FROM inspection_order)as b where <![CDATA[(b.rowindex>=#{start}) and (b.rowindex <= #{last}) and(b.user_id=${userId}) order by b.rowindex]]>
+  </select>
+
+  <select id="selectAllInspectionOrderInRange" parameterType="com.qadata.vo.Range" resultMap="BaseResultMap">
+    SELECT * FROM
+    (SELECT ROW_NUMBER() OVER(ORDER BY id DESC ) as rowIndex,* FROM inspection_order)as b where <![CDATA[(b.rowindex>=#{start})  order by b.rowindex]]>
+  </select>
+
+  <select id="getTotalNumberByAdmin" resultType="int">
+    select count(*) from inspection_order;
+  </select>
+
+  <select id="getTotalNumber" resultType="int" parameterType="java.lang.Integer">
+    select count(*) from inspection_order where user_id=#{userId};
+  </select>
+
+  <select id="getFuzzySearchTotalNumber" resultType="int" parameterType="com.qadata.vo.Range3">
+    select count(*) from
+    inspection_order where
+    user_id=#{userId}
+    and (service_type + inspection_standard + inspection_lab + inspection_address + factory_name like '%${content}%'  or inspection_date like '%${content}%' or estimated_loading_date like '%${content}%')
+  </select>
+
+  <select id="fuzzySearch" parameterType="com.qadata.vo.Range3" resultMap="BaseResultMap">
+    SELECT * FROM
+    (SELECT ROW_NUMBER() OVER(ORDER BY id DESC) as rowIndex,* FROM inspection_order)as b where
+    <![CDATA[(b.rowindex>=#{start})
+      and (b.rowindex <= #{last})
+      and (b.user_id=${userId})
+      and (b.service_type + b.inspection_standard + b.inspection_lab + b.inspection_address + b.factory_name like '%${content}%'  or b.inspection_date like '%${content}%' or b.estimated_loading_date like '%${content}%')
+      order by b.rowindex
+        ]]>
+  </select>
+</mapper>

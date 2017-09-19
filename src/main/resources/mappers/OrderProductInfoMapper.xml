@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qadata.dao.OrderProductInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.qadata.pojo.OrderProductInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ins_order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="end_customer_brand" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="client_purchase_order_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="style" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="client_product_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="total_color_quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="purchased_order_quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="quantity_available_for_ins" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ins_order_id, end_customer_brand, client_purchase_order_no, style, client_product_name, 
+    total_color_quantity, purchased_order_quantity, quantity_available_for_ins
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_product_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_product_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qadata.pojo.OrderProductInfo" >
+    insert into order_product_info (id, ins_order_id, end_customer_brand, 
+      client_purchase_order_no, style, client_product_name, 
+      total_color_quantity, purchased_order_quantity, 
+      quantity_available_for_ins)
+    values (#{id,jdbcType=INTEGER}, #{insOrderId,jdbcType=INTEGER}, #{endCustomerBrand,jdbcType=VARCHAR}, 
+      #{clientPurchaseOrderNo,jdbcType=VARCHAR}, #{style,jdbcType=VARCHAR}, #{clientProductName,jdbcType=VARCHAR}, 
+      #{totalColorQuantity,jdbcType=INTEGER}, #{purchasedOrderQuantity,jdbcType=INTEGER}, 
+      #{quantityAvailableForIns,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qadata.pojo.OrderProductInfo" >
+    insert into order_product_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="insOrderId != null" >
+        ins_order_id,
+      </if>
+      <if test="endCustomerBrand != null" >
+        end_customer_brand,
+      </if>
+      <if test="clientPurchaseOrderNo != null" >
+        client_purchase_order_no,
+      </if>
+      <if test="style != null" >
+        style,
+      </if>
+      <if test="clientProductName != null" >
+        client_product_name,
+      </if>
+      <if test="totalColorQuantity != null" >
+        total_color_quantity,
+      </if>
+      <if test="purchasedOrderQuantity != null" >
+        purchased_order_quantity,
+      </if>
+      <if test="quantityAvailableForIns != null" >
+        quantity_available_for_ins,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="insOrderId != null" >
+        #{insOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="endCustomerBrand != null" >
+        #{endCustomerBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="clientPurchaseOrderNo != null" >
+        #{clientPurchaseOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null" >
+        #{style,jdbcType=VARCHAR},
+      </if>
+      <if test="clientProductName != null" >
+        #{clientProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="totalColorQuantity != null" >
+        #{totalColorQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="purchasedOrderQuantity != null" >
+        #{purchasedOrderQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="quantityAvailableForIns != null" >
+        #{quantityAvailableForIns,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qadata.pojo.OrderProductInfo" >
+    update order_product_info
+    <set >
+      <if test="insOrderId != null" >
+        ins_order_id = #{insOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="endCustomerBrand != null" >
+        end_customer_brand = #{endCustomerBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="clientPurchaseOrderNo != null" >
+        client_purchase_order_no = #{clientPurchaseOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null" >
+        style = #{style,jdbcType=VARCHAR},
+      </if>
+      <if test="clientProductName != null" >
+        client_product_name = #{clientProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="totalColorQuantity != null" >
+        total_color_quantity = #{totalColorQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="purchasedOrderQuantity != null" >
+        purchased_order_quantity = #{purchasedOrderQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="quantityAvailableForIns != null" >
+        quantity_available_for_ins = #{quantityAvailableForIns,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qadata.pojo.OrderProductInfo" >
+    update order_product_info
+    set ins_order_id = #{insOrderId,jdbcType=INTEGER},
+      end_customer_brand = #{endCustomerBrand,jdbcType=VARCHAR},
+      client_purchase_order_no = #{clientPurchaseOrderNo,jdbcType=VARCHAR},
+      style = #{style,jdbcType=VARCHAR},
+      client_product_name = #{clientProductName,jdbcType=VARCHAR},
+      total_color_quantity = #{totalColorQuantity,jdbcType=INTEGER},
+      purchased_order_quantity = #{purchasedOrderQuantity,jdbcType=INTEGER},
+      quantity_available_for_ins = #{quantityAvailableForIns,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--新增-->
+  <select id="selectByOrderId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from order_product_info
+    where ins_order_id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

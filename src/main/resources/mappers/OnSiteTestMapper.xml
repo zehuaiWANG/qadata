@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qadata.dao.OnSiteTestMapper" >
+  <resultMap id="BaseResultMap" type="com.qadata.pojo.OnSiteTest" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="report_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="value" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, report_id, name, value
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from on_site_test
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from on_site_test
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qadata.pojo.OnSiteTest" >
+    insert into on_site_test (id, report_id, name, 
+      value)
+    values (#{id,jdbcType=INTEGER}, #{reportId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{value,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qadata.pojo.OnSiteTest" >
+    insert into on_site_test
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="reportId != null" >
+        report_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="value != null" >
+        value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="reportId != null" >
+        #{reportId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qadata.pojo.OnSiteTest" >
+    update on_site_test
+    <set >
+      <if test="reportId != null" >
+        report_id = #{reportId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qadata.pojo.OnSiteTest" >
+    update on_site_test
+    set report_id = #{reportId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      value = #{value,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--新增-->
+  <select id="selectByReportId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from on_site_test
+    where report_id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>
